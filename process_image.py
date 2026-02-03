@@ -2,40 +2,40 @@ import numpy as np
 import cv2 as cv
 
 
-def identify_circle(image, imgContour, x, y):
+# def identify_circle(image, imgContour, x, y):
 
-    circles = cv.HoughCircles(
-        image,
-        cv.HOUGH_GRADIENT,
-        1,
-        100,
-        param1=50,
-        param2=30,
-        minRadius=200,
-        maxRadius=600,
-    )
+#     circles = cv.HoughCircles(
+#         image,
+#         cv.HOUGH_GRADIENT,
+#         1,
+#         100,
+#         param1=50,
+#         param2=30,
+#         minRadius=200,
+#         maxRadius=600,
+#     )
 
-    if circles is not None:
-        cv.putText(
-            imgContour,
-            f"Circle",
-            (x, y - 5),
-            cv.FONT_HERSHEY_COMPLEX,
-            0.5,
-            (0, 255, 0),
-            2,
-        )
-    else:
+#     if circles is not None:
+#         cv.putText(
+#             imgContour,
+#             f"Circle",
+#             (x, y - 5),
+#             cv.FONT_HERSHEY_COMPLEX,
+#             0.5,
+#             (0, 255, 0),
+#             2,
+#         )
+#     else:
 
-        cv.putText(
-            imgContour,
-            f"Unsure",
-            (x, y - 5),
-            cv.FONT_HERSHEY_COMPLEX,
-            0.5,
-            (0, 255, 0),
-            2,
-        )
+#         cv.putText(
+#             imgContour,
+#             f"Unsure",
+#             (x, y - 5),
+#             cv.FONT_HERSHEY_COMPLEX,
+#             0.5,
+#             (0, 255, 0),
+#             2,
+#         )
 
 
 def empty(a):
