@@ -96,21 +96,29 @@ def getContours(img, imgContour, contourMode, gray, original):
             # y_coordinate = shape.ravel()[1] - 15
             # print(len(shape))
             # if len(shape) > 13:
-            rows = gray.shape[0]
-            circles = cv.HoughCircles(
-                gray,
-                cv.HOUGH_GRADIENT,
-                1,
-                40,
-                param1=50,
-                param2=30,
-                minRadius=144,
-                maxRadius=600,
-            )
-            if circles is not None:
-                circles = np.uint16(np.around(circles))
-                x, y, r = circles[0][0]
-                cv.circle(imgContour, (x, y), r, (0, 255, 0), 2)  # Circle outline
+            circularity = (4 * np.pi * area) / (cv.arcLength(cnt, True) ** 2)
+            if circularity >= 0.8:
+                cv.drawContours(imgContour, cnt, -1, (255, 0, 0), 3)
+                cv.putText(
+                    imgContour,
+                    "Circle",
+                    (shape.ravel()[0], shape.ravel()[1] - 10),
+                    cv.FONT_HERSHEY_COMPLEX,
+                    0.7,
+                    (0, 255, 0),
+                    2,
+                )
+            else:
+                cv.drawContours(imgContour, cnt, -1, (0, 0, 255), 3)
+                cv.putText(
+                    imgContour,
+                    "Not Circle",
+                    (shape.ravel()[0], shape.ravel()[1] - 10),
+                    cv.FONT_HERSHEY_COMPLEX,
+                    0.7,
+                    (0, 255, 0),
+                    2,
+                )
 
             # approx = cv.approxPolyDP(cnt, 0.02 * peri, True)
             # # print(len(approx))
